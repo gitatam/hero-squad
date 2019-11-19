@@ -4,7 +4,7 @@ import models.Squad;
 
 import java.util.List;
 
-public interface SquadDAO {
+public interface SquadDao {
     boolean addSquad(Squad squad);
     List<Squad> findAllSquads();
     Squad findSquadBySlug(String slug);
