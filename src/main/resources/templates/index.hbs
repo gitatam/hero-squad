@@ -1,0 +1,36 @@
+{{#partial "content"}}
+  {{#if username }}
+    <h3 class="p-3">HERO SQUAD</h3>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <a class="navbar-brand text-light">{{ username }}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/heroes">HEROES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/squads">SQUADS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/activities">ACTIVITIES</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  {{ else }}
+    <h4>Register for free.</h4>
+    <form action="/" method="post">
+      <div class="form-group input-group">
+        <input type="text" class="form-control" id="username" placeholder="Pick a username" name="username">
+        <div class="input-group-append">
+          <button class="btn btn-primary">Register</button>
+        </div>
+      </div>
+    </form>
+  {{/if }}
+{{/partial}}
+
+{{> base.hbs}}
