@@ -10,6 +10,12 @@ public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
 
+        before((req, res) ->{
+            if (req.cookie("username") != null) {
+                req.attribute("username", req.cookie("username"));
+            }
+        } );
+
         get("/", (req, res) -> {
             Map<String, String> model = new HashMap<>();
             model.put("username", req.attribute("username"));
