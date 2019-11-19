@@ -10,4 +10,18 @@ public class Squad {
         this.squadName = squadName;
         this.squadObligation = squadObligation;
     }
+
+    public int getSquadSize() {
+        return squadSize;
+    }
+
+    public String getSquadName() {
+        return squadName;
+    }
+
+    public String getSquadObligation() {
+        return squadObligation;
+    }
 }
+
+
