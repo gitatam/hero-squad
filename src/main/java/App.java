@@ -1,5 +1,6 @@
 import dao.SquadDao;
 import dao.SquadDaoImpl;
+import models.Squad;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -20,6 +21,13 @@ public class App {
             }
         } );
 
+        before("/squads", (req, res) -> {
+            if (req.attribute("username") == null) {
+                res.redirect("/");
+                halt();
+            }
+        });
+
         get("/", (req, res) -> {
             Map<String, String> model = new HashMap<>();
             model.put("username", req.attribute("username"));
@@ -38,6 +46,17 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             model.put("squads", squadDao.findAllSquads());
             return new ModelAndView(model, "squads.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/squads", (req, res) -> {
+            String squadName = req.queryParams("name");
+            String squadObligation = req.queryParams("obligation");
+            int squadSize = Integer.parseInt(req.queryParams("size"));
+            Squad squad = new Squad(squadSize, squadName, squadObligation);
+            squadDao.addSquad(squad);
+            res.redirect("/squads");
+            return null;
+
         }, new HandlebarsTemplateEngine());
 
     }

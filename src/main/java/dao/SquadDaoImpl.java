@@ -1,5 +1,6 @@
 package dao;
 
+import exceptions.NotFoundException;
 import models.Squad;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class SquadDaoImpl implements SquadDao {
 
     @Override
     public Squad findSquadBySlug(String slug) {
-        return null;
+        return squads.stream()
+                .filter(squad -> squad.getSlug().equals(slug))
+                .findFirst()
+                .orElseThrow(NotFoundException::new);
     }
 }
