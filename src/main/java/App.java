@@ -28,6 +28,13 @@ public class App {
             }
         });
 
+        before("/squads/:slug", (req, res) -> {
+            if (req.attribute("username") == null) {
+                res.redirect("/");
+                halt();
+            }
+        });
+
         get("/", (req, res) -> {
             Map<String, String> model = new HashMap<>();
             model.put("username", req.attribute("username"));
@@ -58,6 +65,12 @@ public class App {
             return null;
 
         }, new HandlebarsTemplateEngine());
+
+        get("/squads/:slug", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("squad", squadDao.findSquadBySlug(req.params("slug")));
+            return new ModelAndView(model, "squad.hbs");
+        }, new HandlebarsTemplateEngine() );
 
     }
 }

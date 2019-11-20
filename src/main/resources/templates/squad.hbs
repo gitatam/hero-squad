@@ -1,0 +1,15 @@
+{{#partial "title"}}
+  {{ squad.squadName }}
+{{/partial}}
+
+{{#partial "content"}}
+  <h3> {{ squad.squadName }} </h3>
+  <h4>Cause: {{ squad.squadObligation }} </h4>
+  <h6>{{ squad.heroCount }}  / {{ squad.squadSize }} heroes</h6>
+
+  <a href="/squads/{{ squad.slug }}/add-hero" ><button class="btn btn-primary">Proceed to add Heroes</button></a>
+
+
+{{/partial}}
+
+{{> base.hbs}}
