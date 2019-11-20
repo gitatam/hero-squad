@@ -59,5 +59,11 @@ public class App {
 
         }, new HandlebarsTemplateEngine());
 
+        get("/squads/:slug", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("squad", squadDao.findSquadBySlug(req.params("slug")));
+            return new ModelAndView(model, "squad.hbs");
+        }, new HandlebarsTemplateEngine() );
+
     }
 }
