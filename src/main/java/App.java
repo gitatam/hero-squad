@@ -1,5 +1,6 @@
 import dao.SquadDao;
 import dao.SquadDaoImpl;
+import models.Hero;
 import models.Squad;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -29,6 +30,13 @@ public class App {
         });
 
         before("/squads/:slug", (req, res) -> {
+            if (req.attribute("username") == null) {
+                res.redirect("/");
+                halt();
+            }
+        });
+
+        before("/squads/:slug/add-hero", (req, res) -> {
             if (req.attribute("username") == null) {
                 res.redirect("/");
                 halt();
@@ -70,6 +78,26 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             model.put("squad", squadDao.findSquadBySlug(req.params("slug")));
             return new ModelAndView(model, "squad.hbs");
+        }, new HandlebarsTemplateEngine() );
+
+        get("/squads/:slug/add-hero", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            Squad squad = squadDao.findSquadBySlug(req.params("slug"));
+            model.put("squad",squad);
+            model.put("squads", squadDao.findAllSquads());
+            return new ModelAndView(model, "heroes.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/squads/:slug/add-hero", (req, res) ->{
+            String heroName = req.queryParams("name");
+            int heroAge = Integer.parseInt(req.queryParams("age"));
+            String heroPower = req.queryParams("power");
+            String heroWeakness = req.queryParams("weakness");
+            Squad squad = squadDao.findSquadBySlug(req.params("slug"));
+            Hero hero = new Hero(heroName, heroAge, heroPower, heroWeakness, squad.getSquadName());
+            squad.addHeroToSquad(hero);
+            res.redirect("/squads");
+            return null;
         }, new HandlebarsTemplateEngine() );
 
     }

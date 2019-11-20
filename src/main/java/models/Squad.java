@@ -46,6 +46,10 @@ public class Squad {
     public int getHeroCount() {
         return heroes.size();
     }
+
+    public boolean addHeroToSquad(Hero hero){
+        return heroes.add(hero);
+    }
 }
 
 

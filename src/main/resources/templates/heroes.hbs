@@ -1,0 +1,22 @@
+{{#partial "title"}} Create Your Own Super Hero {{/partial}}
+
+{{#partial "content"}}
+
+  <form action="/squads/{{squad.slug}}/add-hero" method="post">
+    <div class="form-group w-75">
+      <input type="text" class="form-control" id="hero-name" placeholder="Hero name" name="name">
+      <input type="text" class="form-control" id="hero-age" placeholder="Hero age" name="age">
+      <input type="text" class="form-control" id="hero-power" placeholder="Hero power" name="power">
+      <input type="text" class="form-control" id="hero-weakness" placeholder="Hero weakness" name="weakness">
+      <select type="text" class="form-control" id="hero-squad" placeholder="Squad" name="squad-name">
+        <option value="{{squad.squadName}}">{{squad.squadName}}</option>
+      </select>
+    </div>
+    <button class="btn btn-primary">Add Hero</button>
+  </form>
+
+{{/partial}}
+
+
+
+{{> base.hbs}}
