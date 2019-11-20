@@ -1,5 +1,6 @@
 import dao.SquadDao;
 import dao.SquadDaoImpl;
+import exceptions.NotFoundException;
 import models.Hero;
 import models.Squad;
 import spark.ModelAndView;
@@ -99,6 +100,13 @@ public class App {
             res.redirect("/squads");
             return null;
         }, new HandlebarsTemplateEngine() );
+
+        exception(NotFoundException.class, (exec, req, res) -> {
+            res.status(404);
+            HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
+            String html = engine.render(new ModelAndView(null, "not-found.hbs"));
+            res.body(html);
+        });
 
     }
 }
