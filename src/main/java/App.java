@@ -1,3 +1,5 @@
+import dao.SquadDao;
+import dao.SquadDaoImpl;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -9,6 +11,8 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
+
+        SquadDao squadDao = new SquadDaoImpl();
 
         before((req, res) ->{
             if (req.cookie("username") != null) {
@@ -28,6 +32,12 @@ public class App {
             res.cookie("username", username);
             model.put("username", username);
             return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("/squads", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("squads", squadDao.findAllSquads());
+            return new ModelAndView(model, "squads.hbs");
         }, new HandlebarsTemplateEngine());
 
     }
