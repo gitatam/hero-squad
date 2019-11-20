@@ -34,11 +34,15 @@ public class SquadTest {
     }
 
     @Test
-    public void SquadInstantiatesWithRightSize_expectedObligation() {
+    public void SquadInstantiatesWithRightObligation_expectedObligation() {
         squadTest = new Squad(expectedSquadSize, expectedSquadName, expectedObligation);
         String actualSquadObligation = squadTest.getSquadObligation();
         assertEquals(expectedObligation, actualSquadObligation);
     }
+
+//    TOOD: Add test for slug getter
+    @Test
+    public void SquadInstantiatesWithRightSlug_expectedSlug() {}
 
     @Before
     public void setUp() {
