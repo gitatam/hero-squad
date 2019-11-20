@@ -1,5 +1,8 @@
+{{#partial "title"}} Squads {{/partial}}
+
+
 {{#partial "content"}}
-  <h2>Current Squads:-</h2>
+  <h3>Hero Squads > Current Squads</h3>
   <ul>
     {{#each squads}}
       <li>
@@ -12,9 +15,9 @@
 
   <form action="/squads" method="post">
     <div class="form-group w-75">
-      <input type="text" class="form-control" id="squad-name" placeholder="Squad name" name="name">
-      <input type="text" class="form-control" id="squad-obligation" placeholder="Obligation" name="obligation">
-      <input type="text" class="form-control" id="squad-size" placeholder="Squad size" name="size">
+      <input type="text" class="form-control" id="squad-name" placeholder="Squad name" name="name" required>
+      <input type="text" class="form-control" id="squad-obligation" placeholder="Obligation" name="obligation" required>
+      <input type="text" class="form-control" id="squad-size" placeholder="Squad size" name="size" required>
     </div>
     <button class="btn btn-primary">Add Squad</button>
   </form>

@@ -1,3 +1,8 @@
 body {
     font-family: 'Calistoga', cursive;
 }
+
+.navbar ul li .disabled {
+    color: gray;
+    pointer-events: none;
+}
