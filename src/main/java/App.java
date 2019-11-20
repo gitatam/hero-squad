@@ -28,6 +28,13 @@ public class App {
             }
         });
 
+        before("/squads/:slug", (req, res) -> {
+            if (req.attribute("username") == null) {
+                res.redirect("/");
+                halt();
+            }
+        });
+
         get("/", (req, res) -> {
             Map<String, String> model = new HashMap<>();
             model.put("username", req.attribute("username"));
