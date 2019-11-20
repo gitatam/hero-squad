@@ -1,0 +1,24 @@
+{{#partial "content"}}
+  <h2>Current Squads:-</h2>
+  <ul>
+    {{#each squads}}
+      <li>
+        Name: <a href="/squads/{{ slug }}">{{ squadName }}</a><br>
+        Obligation: {{ squadObligation }} <br>
+        Size: {{ heroCount }}  / {{ squadSize }}&nbsp;members
+      </li>
+    {{/each}}
+  </ul>
+
+  <form action="/squads" method="post">
+    <div class="form-group w-75">
+      <input type="text" class="form-control" id="squad-name" placeholder="Squad name" name="name">
+      <input type="text" class="form-control" id="squad-obligation" placeholder="Obligation" name="obligation">
+      <input type="text" class="form-control" id="squad-size" placeholder="Squad size" name="size">
+    </div>
+    <button class="btn btn-primary">Add Squad</button>
+  </form>
+
+{{/partial}}
+
+{{> base.hbs}}
